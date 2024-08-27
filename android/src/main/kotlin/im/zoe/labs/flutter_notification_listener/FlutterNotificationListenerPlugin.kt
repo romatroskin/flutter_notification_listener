@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import io.flutter.embedding.engine.FlutterEngineCache
-import io.flutter.embedding.engine.FlutterJNI
+// import io.flutter.embedding.engine.FlutterJNI
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.JSONMessageCodec
@@ -47,7 +47,7 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
       event.setStreamHandler(this)
     }
 
-    flutterJNI.attachToNative() 
+    // flutterJNI.attachToNative() 
 
     // store the flutter engine
     val engine = flutterPluginBinding.flutterEngine
@@ -74,7 +74,7 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
       event.setStreamHandler(null) 
       eventChannel = null 
     }
-    flutterJNI.detachFromNativeAndReleaseResources() 
+    // flutterJNI.detachFromNativeAndReleaseResources() 
   }
 
   @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
