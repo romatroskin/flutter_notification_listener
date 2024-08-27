@@ -18,7 +18,7 @@ import java.nio.ByteBuffer
 import java.util.*
 
 
-class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
+class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, EventChannel.StreamHandler, BroadcastReceiver() {
   private var eventSink: EventChannel.EventSink? = null
 
   private var methodChannel: MethodChannel? = null 
@@ -54,10 +54,9 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
     FlutterEngineCache.getInstance().put(FLUTTER_ENGINE_CACHE_KEY, engine)
 
     // TODO: remove those code
-    val receiver = NotificationReceiver()
     val intentFilter = IntentFilter()
     intentFilter.addAction(NotificationsHandlerService.NOTIFICATION_INTENT)
-    mContext.registerReceiver(receiver, intentFilter)
+    mContext.registerReceiver(this, intentFilter)
 
     Log.i(TAG, "attached engine finished")
   }
@@ -86,11 +85,9 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
     eventSink = null
   }
 
-  internal inner class NotificationReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
+  override fun onReceive(context: Context, intent: Intent) {
       eventSink?.success(intent.getStringExtra(NotificationsHandlerService.NOTIFICATION_INTENT_KEY)?:"{}")
     }
-  }
 
   companion object {
     const val TAG = "ListenerPlugin"
