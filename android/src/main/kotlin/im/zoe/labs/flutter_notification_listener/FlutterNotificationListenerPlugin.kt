@@ -74,7 +74,7 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
       event.setStreamHandler(null) 
       eventChannel = null 
     }
-    flutterJNI.attachToNative() 
+    flutterJNI.detachFromNativeAndReleaseResources() 
   }
 
   @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
