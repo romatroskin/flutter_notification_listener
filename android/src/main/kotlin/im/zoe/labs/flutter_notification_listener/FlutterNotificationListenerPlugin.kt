@@ -23,7 +23,7 @@ class FlutterNotificationListenerPlugin : FlutterPlugin, MethodChannel.MethodCal
 
   private var methodChannel: MethodChannel? = null 
   private var eventChannel: EventChannel? = null 
-  private val flutterJNI: FlutterJNI =  FlutterJNI() 
+  // private val flutterJNI: FlutterJNI =  FlutterJNI() 
 
   private lateinit var mContext: Context
 
