@@ -5,7 +5,7 @@ buildscript {
     ext.kotlin_version = '1.9.22'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -17,7 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -27,11 +27,18 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 34
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
         minSdkVersion 23
+    }
+    lintOptions {
+        disable 'InvalidPackage'
     }
 }
 
